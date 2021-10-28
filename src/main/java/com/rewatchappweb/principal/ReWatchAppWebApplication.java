@@ -2,7 +2,6 @@ package com.rewatchappweb.principal;
 
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,18 +9,12 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.rewatchappweb.dao.IMediaDAO;
-import com.rewatchappweb.dao.IUsuarioDAO;
-
 @SpringBootApplication
 @ComponentScan({"com.rewatchappweb"})
 @EntityScan("com.rewatchappweb")
 @EnableJpaRepositories("com.rewatchappweb")
 public class ReWatchAppWebApplication implements CommandLineRunner{
 
-	@Autowired
-	IUsuarioDAO uDAO;
-	IMediaDAO mDAO;
 	public static void main(String[] args) {
 		SpringApplication.run(ReWatchAppWebApplication.class, args);
 		

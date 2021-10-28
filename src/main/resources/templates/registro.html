@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro</title>
+<!-- CSS only -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/"><strong>ReWatchApp</strong></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/">Inicio</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/login">Login</a>
+						</li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/registro">Registrarme</a></li>
+					</ul>
+					<form class="d-flex">
+						<input class="form-control me-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<br>
+	<br>
+	<br>
+	<h2 class="dysplay-4">Resgistro</h2>
+	<form action="/registrar" method="post" class="row g-3" >
+		<div class="col-md-6">
+			<label for="inputNombre" class="form-label">Nombre</label> 
+			<input type="text" class="form-control" id="inputNombre" name="inputNombre">
+		</div>
+		<div class="col-md-6">
+			<label for="inputEdad" class="form-label">Edad</label> 
+			<input type="number" class="form-control" id="inputEdad" name="inputEdad">
+		</div>
+		<div class="col-md-6">
+			<label for="inputEmail" class="form-label">Email</label> 
+			<input type="email" class="form-control" id="inputEmail" name="inputEmail">
+		</div>
+		<div class="col-md-6">
+			<label for="inputPassword1" class="form-label">Contraseña</label> 
+			<input type="password" class="form-control" id="inputPassword1" name="inputPassword1">
+		</div>
+		<div class="col-md-6">
+			<label for="inputPassword2" class="form-label">Repetir Contraseña</label> 
+			<input type="password" class="form-control" id="inputPassword2" name="inputPassword2">
+		</div>
+		<div class="col-12">
+			<button type="submit" class="btn btn-primary">Sign in</button>
+		</div>
+	</form>
+	<!-- JavaScript Bundle with Popper -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
