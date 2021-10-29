@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/** $(document).ready(function(){
 	//on ready
 });
 
@@ -16,4 +16,4 @@ async function registrarUsuario(){
 		},
 		body: JSON.stringify(datos)
 	});
-}
+}*/

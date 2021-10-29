@@ -40,27 +40,31 @@
 	<br>
 	<br>
 	<br>
+	
 	<h2 class="dysplay-4">Resgistro</h2>
-	<form action="/registrar" method="post" class="row g-3" >
+	<form action="/registrar" method="POST" class="row g-3" >
+		
+		<p th:if="${error != null}" th:text="${error}" style="color:red"></p>
+		
 		<div class="col-md-6">
 			<label for="inputNombre" class="form-label">Nombre</label> 
-			<input type="text" class="form-control" id="inputNombre" name="inputNombre">
+			<input type="text" class="form-control" id="inputNombre" name="inputNombre" th:value="${nombre}">
 		</div>
 		<div class="col-md-6">
-			<label for="inputEdad" class="form-label">Edad</label> 
-			<input type="number" class="form-control" id="inputEdad" name="inputEdad">
+			<label for="inputEdad" class="form-label">Edad(acá poné un valor, sino me rompo)</label> 
+			<input type="number" class="form-control" id="inputEdad" name="inputEdad" th:value="${edad}">
 		</div>
 		<div class="col-md-6">
 			<label for="inputEmail" class="form-label">Email</label> 
-			<input type="email" class="form-control" id="inputEmail" name="inputEmail">
+			<input type="email" class="form-control" id="inputEmail" name="inputEmail" th:value="${email}">
 		</div>
 		<div class="col-md-6">
 			<label for="inputPassword1" class="form-label">Contraseña</label> 
-			<input type="password" class="form-control" id="inputPassword1" name="inputPassword1">
+			<input type="password" class="form-control" id="inputPassword1" name="inputPassword1" th:value="${pass1}">
 		</div>
 		<div class="col-md-6">
 			<label for="inputPassword2" class="form-label">Repetir Contraseña</label> 
-			<input type="password" class="form-control" id="inputPassword2" name="inputPassword2">
+			<input type="password" class="form-control" id="inputPassword2" name="inputPassword2" th:value="${pass2}">
 		</div>
 		<div class="col-12">
 			<button type="submit" class="btn btn-primary">Sign in</button>
