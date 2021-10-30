@@ -101,10 +101,8 @@ public class UsuarioServicio implements UserDetailsService{
 		Usuario usuario = usuarioRepo.findByEmail(email);
 		if (usuario != null) {
 			List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-			GrantedAuthority p1 = new SimpleGrantedAuthority("MODULO_MEDIA");
-			GrantedAuthority p2 = new SimpleGrantedAuthority("MODULO_BIBLIOTECA");
+			GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USER");
 			permisos.add(p1);
-			permisos.add(p2);
 			User user = new User(usuario.getEmail(), usuario.getPassword(), permisos);
 			return user;
 		} else {

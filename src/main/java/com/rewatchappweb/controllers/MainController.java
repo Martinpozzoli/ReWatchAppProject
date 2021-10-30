@@ -1,6 +1,7 @@
 package com.rewatchappweb.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,22 @@ public class MainController {
 		return "index.html";
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/home")
+	public String bienvenido() {
+		return "home.html";
+	}
+	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@RequestParam(required = false) String error, 
+						@RequestParam(required = false) String logout,
+						ModelMap model) {
+		if(error != null) {
+			model.put("error", "Dirección de correo o contraseña incorrectos.");
+		}
+		if(logout != null) {
+			model.put("logout", "Ha salido correctamente.");
+		}
 		return "login.html";
 	}
 	
