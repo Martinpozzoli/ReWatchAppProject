@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.rewatchappweb.utils.PeliculasAPI;
+
+
+
 
 @SpringBootApplication
 @ComponentScan({"com.rewatchappweb"})
@@ -16,5 +20,8 @@ public class ReWatchAppWebApplication{
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ReWatchAppWebApplication.class, args);
+		
+		PeliculasAPI pAPI = new PeliculasAPI();
+		pAPI.buscarTop();
 	}
 }

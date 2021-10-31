@@ -1,5 +1,6 @@
 package com.rewatchappweb.controllers;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.rewatchappweb.errores.ErrorServicio;
 import com.rewatchappweb.servicios.UsuarioServicio;
+import com.rewatchappweb.utils.PeliculasAPI;
 
 @Controller
 @RequestMapping("/")
@@ -21,12 +23,6 @@ public class MainController {
 	@GetMapping("/")
 	public String index() {
 		return "index.html";
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/home")
-	public String bienvenido() {
-		return "home.html";
 	}
 	
 	@GetMapping("/login")
@@ -47,7 +43,43 @@ public class MainController {
 		return "registro.html";
 	}
 	
-	//ACCIONES------------------------------------
+	//Una vez iniciada la sesión--------------------------
+	
+	@Autowired
+	private PeliculasAPI peliculasAPI;
+	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/home")
+	public String bienvenido(ModelMap model) {
+		JSONObject object = peliculasAPI.buscarPorID();
+		model.put("id", object.getString("imDbId"));
+		model.put("titulo", object.getString("title"));
+		model.put("year", object.getString("year"));
+		model.put("rating", object.getString("imDb"));
+		return "home.html";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/peliculas")
+	public String peliculas(/*ModelMap model*/) {
+//		JSONObject object = peliculasAPI.buscarTop();
+//		model.
+		return "peliculas.html";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/series")
+	public String series() {
+		return "series.html";
+	}
+	
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@GetMapping("/animes")
+	public String animes() {
+		return "animes.html";
+	}
+	
+	//ACCIONES-----------------------------------------
 	//No funciona la verificacion de la edad, si no se introduce un valor en el campo tira un error el servidor
 	@PostMapping("/registrar")
 	public String registrar(ModelMap modelo,
