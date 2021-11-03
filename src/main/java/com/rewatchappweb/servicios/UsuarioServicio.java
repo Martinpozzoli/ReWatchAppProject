@@ -76,7 +76,7 @@ public class UsuarioServicio implements UserDetailsService{
 			throw new ErrorServicio("Nombre sin especificar");
 		}
 		
-		if (String.valueOf(edad).isBlank() || edad.toString().isEmpty()) {
+		if (String.valueOf(edad).isBlank() || edad == null) {
 			System.out.println(edad);
 			System.out.println("Error en registrar");
 			throw new ErrorServicio("Edad sin especificar");

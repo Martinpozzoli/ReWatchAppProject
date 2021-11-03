@@ -2,6 +2,7 @@ package com.rewatchappweb.controllers;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -80,14 +81,14 @@ public class MainController {
 	}
 	
 	//ACCIONES-----------------------------------------
-	//No funciona la verificacion de la edad, si no se introduce un valor en el campo tira un error el servidor
+	//SOLUCIONADO: el problema en el que no se registraba la edad al ser nula con @NullAble
 	@PostMapping("/registrar")
 	public String registrar(ModelMap modelo,
-							@RequestParam String inputNombre, 
-							@RequestParam Integer inputEdad,
-							@RequestParam String inputEmail, 
-							@RequestParam String inputPassword1, 
-							@RequestParam String inputPassword2) {
+							@RequestParam @Nullable String inputNombre, 
+							@RequestParam @Nullable Integer inputEdad,
+							@RequestParam @Nullable String inputEmail, 
+							@RequestParam @Nullable String inputPassword1, 
+							@RequestParam @Nullable String inputPassword2) {
 		System.out.println(inputEdad);
 		try {
 			usuarioServicio.registrar(inputNombre, inputEdad, inputEmail, inputPassword1, inputPassword2);
