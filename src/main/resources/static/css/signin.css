@@ -4,13 +4,50 @@ body {
 }
 
 body {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
+	background-image: url("../img/fondo.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+    background-size: cover;
+  	display: flex;
+  	align-items: center;
+  	padding-top: 40px;
+  	padding-bottom: 40px;
+  	background-color: #f5f5f5;
 }
 
+body:before{
+	content:'';
+	position: fixed;
+	background-color: rgba(0,0,0, 0.65);
+	background-size: cover;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+main{
+	padding-top: min(60px, 15%);
+	position: relative;
+	color: white;
+}
+
+.main-registro{
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.boton-registro{
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+label{
+	color: grey;
+}
+.checkbox label{
+	color: white;
+}
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -37,3 +74,15 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+img{
+	border-radius: 50%;
+}
+
+.dysplay-4{
+	text-align: center;
+}
+
+
+
+

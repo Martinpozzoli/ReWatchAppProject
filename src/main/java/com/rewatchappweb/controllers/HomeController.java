@@ -1,0 +1,50 @@
+package com.rewatchappweb.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.rewatchappweb.entities.Media;
+import com.rewatchappweb.entities.MediaLists;
+import com.rewatchappweb.services.MediaService;
+
+@Controller
+@RequestMapping("/home")
+public class HomeController {
+	
+	@Autowired
+	private MediaService mediaService;
+
+	@PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
+	@GetMapping(value = "")
+	public String contenedorPrincipal(Model model) {
+		try {
+			MediaLists mediaLists = mediaService.updateMediaLists();
+			
+			List<Media> comingSoonMovies = mediaService.listForController("comingSoonMovies", mediaLists);
+			List<Media> comingSoonSeries = mediaService.listForController("comingSoonSeries", mediaLists);
+			List<Media> popularMovies = mediaService.listForController("popularMovies", mediaLists);
+			List<Media> popularSeries = mediaService.listForController("popularSeries", mediaLists);
+			List<Media> bestMovies = mediaService.listForController("bestMovies", mediaLists);
+			List<Media> bestSeries = mediaService.listForController("bestSeries", mediaLists);
+			
+			List<Media> moviesForCarousel = popularMovies.subList(0, 4);
+			model.addAttribute("moviesForCarousel", moviesForCarousel);
+		
+			model.addAttribute("comingSoonMovies", comingSoonMovies);
+			model.addAttribute("comingSoonSeries", comingSoonSeries);
+			model.addAttribute("popularMovies", popularMovies);
+			model.addAttribute("popularSeries", popularSeries);
+			model.addAttribute("bestMovies", bestMovies);
+			model.addAttribute("bestSeries", bestSeries);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "home.html";
+	}
+}

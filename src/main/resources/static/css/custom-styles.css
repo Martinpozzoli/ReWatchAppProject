@@ -3,7 +3,24 @@ html, body {
 	height: 100%;
  }
 
-body {background: #f9f9f9 url(../img/page-bg-1.jpg);}
+body{
+    background-image: url("../img/fondo.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    color: white;
+}
+body:before{
+	content:'';
+	position: fixed;
+	background-color: rgba(0,0,0, 0.65);
+	background-size: cover;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
 
 .main-container {
 	height:auto; 

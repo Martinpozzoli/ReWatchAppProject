@@ -7,6 +7,7 @@
 <title>Registro</title>
 <!-- CSS only -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/signin.css" rel="stylesheet">
 </head>
 <body>
 	<header>
@@ -21,39 +22,34 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/">Inicio</a></li>
-						<li class="nav-item"><a class="nav-link active" href="/login">Login</a></li>
-						<li class="nav-item"><a class="nav-link active"	href="/registro">Registrarme</a></li>
+						<li class="nav-item"><a class="nav-link active"	aria-current="page" href="/">Volver</a></li>
+						<li class="nav-item"><a class="nav-link active" href="/login">Iniciar Sesión</a></li>
 					</ul>
-					<form class="d-flex">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Buscar</button>
-					</form>
 				</div>
 			</div>
 		</nav>
 	</header>
-	<br>
-	<br>
-	<br>
-	
-	<h2 class="dysplay-4">Resgistro</h2>
+	<main class="main-registro">
+	<h2 class="dysplay-4">Registro</h2>
 	<form action="/registrar" method="POST" class="row g-3" >
 		
 		<p th:if="${error != null}" th:text="${error}" style="color:red"></p>
 		
 		<div class="col-md-6">
 			<label for="inputNombre" class="form-label">Nombre</label> 
-			<input type="text" class="form-control" id="inputNombre" name="inputNombre" th:value="${nombre}">
+			<input type="text" class="form-control" id="inputFirstName" name="inputFirstName" th:value="${nombre}">
 		</div>
 		<div class="col-md-6">
-			<label for="inputEdad" class="form-label">Edad</label> 
-			<input type="number" class="form-control" id="inputEdad" name="inputEdad" th:value="${edad}">
+			<label for="inputNombre" class="form-label">Apellido</label> 
+			<input type="text" class="form-control" id="inputLastName" name="inputLastName" th:value="${apellido}">
 		</div>
 		<div class="col-md-6">
 			<label for="inputEmail" class="form-label">Email</label> 
 			<input type="email" class="form-control" id="inputEmail" name="inputEmail" th:value="${email}">
+		</div>
+		<div class="col-md-6">
+			<label for="inputEdad" class="form-label">Fecha de nacimiento</label> 
+			<input type="date" class="form-control" id="inputBirthDate" name="inputBirthDate" th:value="${nacimiento}">
 		</div>
 		<div class="col-md-6">
 			<label for="inputPassword1" class="form-label">Contraseña</label> 
@@ -63,10 +59,11 @@
 			<label for="inputPassword2" class="form-label">Repetir Contraseña</label> 
 			<input type="password" class="form-control" id="inputPassword2" name="inputPassword2" th:value="${pass2}">
 		</div>
-		<div class="col-12">
+		<div class="boton-registro">
 			<button type="submit" class="btn btn-primary">Registrarme</button>
 		</div>
 	</form>
+	</main>
 	<!-- JavaScript Bundle with Popper -->
 	<script src="js/bootstrap.bundle.min.js"></script>
 </body>

@@ -1,0 +1,63 @@
+main{
+	position: relative;
+	display: grid;
+	grid-template-areas:
+		"carousel"
+		"lists"
+		"footer"
+}
+.lists{
+	margin-top: 0px;
+	grid-area: "lists";
+}
+
+.scrollable{
+	width: 100%;
+  	max-width: 1380px;
+	background-color: rgba(6, 6, 191, 0.432);
+    border: 5px solid rgba(8, 8, 123, 0.83);
+	overflow-x: auto;
+	display: grid;
+	grid-template-columns: repeat(20,300px);
+}
+
+.media-item{
+	height: 200px;
+	width: 400px;
+	
+}
+
+.miniatura{
+	height: 200px;
+	width: 100px;
+	grid-area: "miniatura";
+}
+
+.miniatura img{
+  	height: 100%;
+  	width: 100%;
+  	border-radius: 10%;  	
+}
+
+.titulo{
+	justify-content: center;
+	text-align: center;
+	grid-area: "titulo";
+}
+
+.media-item{
+	display: grid;
+	grid-template-columns: 50% auto;
+	grid-template-areas:
+		"titulo miniatura"
+}
+
+footer{
+	grid-area: "footer";
+	bottom: 0;
+}
+
+.carousel{
+	grid-area: "carousel";
+}
+

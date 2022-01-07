@@ -1,23 +1,22 @@
 package com.rewatchappweb.controllers;
 
-import org.json.JSONObject;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import com.rewatchappweb.errores.ErrorServicio;
-import com.rewatchappweb.servicios.UsuarioServicio;
-import com.rewatchappweb.utils.PeliculasAPI;
+import com.rewatchappweb.errors.ErrorServicio;
+import com.rewatchappweb.services.UserService;
 
 @Controller
 @RequestMapping("/")
 public class MainController {
 	
 	@Autowired
-	private UsuarioServicio usuarioServicio;
+	private UserService userService;
 
 	//DIRECCIONES PRINCIPALES-----------------------------
 	
@@ -33,9 +32,6 @@ public class MainController {
 		if(error != null) {
 			model.put("error", "Dirección de correo o contraseña incorrectos.");
 		}
-		if(logout != null) {
-			model.put("logout", "Ha salido correctamente.");
-		}
 		return "login.html";
 	}
 	
@@ -44,63 +40,33 @@ public class MainController {
 		return "registro.html";
 	}
 	
-	//Una vez iniciada la sesión--------------------------
-	
-	@Autowired
-	private PeliculasAPI peliculasAPI;
-	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/home")
-	public String bienvenido(ModelMap model) {
-		JSONObject object = peliculasAPI.buscarPorID();
-		model.put("id", object.getString("imDbId"));
-		model.put("titulo", object.getString("title"));
-		model.put("year", object.getString("year"));
-		model.put("rating", object.getString("imDb"));
-		return "home.html";
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/peliculas")
-	public String peliculas(/*ModelMap model*/) {
-//		JSONObject object = peliculasAPI.buscarTop();
-//		model.
-		return "peliculas.html";
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/series")
-	public String series() {
-		return "series.html";
-	}
-	
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
-	@GetMapping("/animes")
-	public String animes() {
-		return "animes.html";
-	}
-	
-	//ACCIONES-----------------------------------------
-	//SOLUCIONADO: el problema en el que no se registraba la edad al ser nula con @NullAble
+	//ACCIONES----------------------------------------------
 	@PostMapping("/registrar")
 	public String registrar(ModelMap modelo,
-							@RequestParam @Nullable String inputNombre, 
-							@RequestParam @Nullable Integer inputEdad,
+							@RequestParam @Nullable String inputFirstName, 
+							@RequestParam @Nullable String inputLastName, 
+							@RequestParam @Nullable String inputBirthDate,
 							@RequestParam @Nullable String inputEmail, 
 							@RequestParam @Nullable String inputPassword1, 
 							@RequestParam @Nullable String inputPassword2) {
-		System.out.println(inputEdad);
+		LocalDate localBirthDate;
 		try {
-			usuarioServicio.registrar(inputNombre, inputEdad, inputEmail, inputPassword1, inputPassword2);
+			localBirthDate = LocalDate.parse(inputBirthDate);
+		}catch(Exception e) {
+			localBirthDate = LocalDate.parse("1000-01-01");
+			e.printStackTrace();
+		}
+		try {
+			userService.register(inputFirstName, inputLastName, localBirthDate, inputEmail, inputPassword1, inputPassword2);
 		} catch (ErrorServicio e) {
 			modelo.put("error", e.getMessage());
-			modelo.put("nombre", inputNombre);
-			modelo.put("edad", inputEdad);
+			modelo.put("nombre", inputFirstName);
+			modelo.put("apellido", inputLastName);
+			modelo.put("nacimiento", localBirthDate);
 			modelo.put("email", inputEmail);
 			modelo.put("pass1", inputPassword1);
 			modelo.put("pass2", inputPassword2);
-			System.out.println(inputEdad);
-			System.out.println("Error en mostrar(función /registrar)");
+			System.out.println(e.getMessage());
 			return "registro.html";
 		}
 		return "index.html";

@@ -1,0 +1,77 @@
+body{
+    background-image: url("../img/fondo.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    color: white;
+}
+body:before{
+	content:'';
+	position: fixed;
+	background-color: rgba(0,0,0, 0.65);
+	background-size: cover;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+div, footer{
+	color: white;
+	position: relative;
+}
+
+.presentacion{
+	grid-area: presentacion;
+	justify-self: center;
+	text-align: center;
+}
+
+.ingreso{
+	grid-area: ingreso;
+	justify-self: center;
+	align-self: center;
+}
+
+.about{
+	grid-area: about;
+	justify-self: stretch;
+}
+
+.funcionamiento{
+	grid-area: funcionamiento;
+	justify-self: stretch;
+}
+
+.limitaciones{
+	grid-area: limitaciones;
+	justify-self: stretch;
+}
+
+.footer{
+	grid-area: footer;
+}
+
+.grid-container > * {
+	padding: 20px;
+}
+.grid-container{
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 50% auto;
+	grid-template-rows: auto;
+	grid-template-areas:
+		"presentacion 	presentacion"
+		"about			ingreso"
+		"funcionamiento limitaciones"
+		"footer footer"
+		
+}
+
+p{
+	font-size: 150%;
+}
+
+
+
+

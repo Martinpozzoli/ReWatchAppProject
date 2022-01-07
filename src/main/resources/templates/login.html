@@ -40,19 +40,12 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/login">Login</a>
+            <a class="nav-link active" aria-current="page" href="/">Volver</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/registro">Registrarme</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </nav>
@@ -60,7 +53,7 @@
         
     <main class="form-signin">
       <form action="/logincheck" method="POST">
-        <img class="mb-4" src="" alt="" width="72" height="57">
+        <img class="mb-4" src="img/user-default.png" alt="" width="85" height="85">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     	<p th:if="${error != null}" th:text="${error}" style="color:red"></p>
         <p th:if="${logout != null}" th:text="${logout}" style="color:green"></p>
@@ -68,6 +61,7 @@
           <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
           <label for="floatingInput">Correo electrónico</label>
         </div>
+        <br>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
           <label for="floatingPassword">Contraseña</label>
@@ -79,7 +73,6 @@
           </label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
       </form>
     </main>
       <!-- JavaScript Bundle with Popper -->
