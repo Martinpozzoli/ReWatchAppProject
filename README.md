@@ -29,8 +29,8 @@
         
 ## Limitaciones
         El uso de la API de IMDb de forma gratuita es limitado por lo que para evitar exceder ese límite 
-        de peticiones, cada vez que un usuario interactua con una pelicula o serie, se guarda la información
-        de la misma en una base de datos propia de manera temporal así, el proximo usuario que interactue con
+        de peticiones, cada vez que un usuario interactúa con una película o serie, se guarda la información
+        de la misma en una base de datos propia de manera temporal así, el próximo usuario que interactúe con
         la misma media, accederá a su contenido mediante el uso de la base de datos propia evitando de esta 
         manera el uso de la API.
         
