@@ -1,6 +1,6 @@
 # ReWatchAppProject
 ##  ¿De qué se trata?
-        La idea de esta apliacion es presentar al usuario una forma de acceder a información sobre peliculas y series, 
+        La idea de esta aplicación es presentar al usuario una forma de acceder a información sobre peliculas y series, 
         y crear una cuenta en la cual podrá gestionar listas (en el futuro tambien podrá gestionar sus gustos para 
         obtener recomendaciones).
         
