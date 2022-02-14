@@ -1,8 +1,8 @@
 # ReWatchAppProject
 ##  ¿De qué se trata?
-        La idea de esta aplicación es presentar al usuario una forma de acceder a información sobre peliculas y series, 
-        y crear una cuenta en la cual podrá gestionar listas (en el futuro tambien podrá gestionar sus gustos para 
-        obtener recomendaciones).
+        La idea de esta aplicación es presentar al usuario una forma de acceder a información sobre 
+        peliculas y series, y que pueda crear una cuenta en la cual podrá gestionar listas 
+        (en el futuro tambien podrá gestionar sus gustos para obtener recomendaciones).
         
         En la página inicial se explica el propósito, funcionamiento y las limitaciones de la aplicación. 
         
@@ -14,7 +14,8 @@
         Al acceder a la información y detalles propios de cada película se le da al usuario la opción de 
         agregarlas a tres listas: "Favoritas", "Ya Vistas" y "de Espera".
         
-        En la sección de "Mi Perfil" el usuario puede consultar sus listas previamente mencionadas y gestionarlas.
+        En la sección de "Mi Perfil" el usuario puede consultar sus listas previamente mencionadas y 
+        gestionarlas.
         
 ## Funcionamiento
         Gracias al uso de APIs como IMDb, esta aplicación obtiene información sobre películas y series 
