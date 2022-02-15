@@ -143,6 +143,8 @@ public class MediaService {
 		return mediaArray;
 	}
 	
+	//Obtiene los ids de medias que no tienen titulo y borra los 
+	//registros de la base de datos y de las listas que las contenian:
 	public void cleanUselessMedia() {
 		List<String> idsNullMedia = mediaRepo.getIdsOfNullTitlesFromMedia();
 		MediaLists mLists = mediaListsRepo.getById(1);
@@ -158,7 +160,6 @@ public class MediaService {
 		
 		mediaRepo.deleteNullTitlesFromMedia();
 		
-		System.out.println("Deleted... maybe");
 	}
 	
 	

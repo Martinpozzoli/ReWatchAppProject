@@ -23,6 +23,6 @@ public interface MediaRepository extends JpaRepository<Media,String>{
 	public List<String> getIdsOfNullTitlesFromMedia();
 	
 	@Modifying
-	@Query("DELETE m FROM Media m WHERE m.title =''")
+	@Query("DELETE FROM Media m WHERE m.title =''")
 	public void deleteNullTitlesFromMedia();
 }
