@@ -1,23 +1,24 @@
 package com.rewatchappweb.services;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rewatchappweb.entities.Media;
 import com.rewatchappweb.entities.MediaLists;
-import com.rewatchappweb.entities.User;
+import com.rewatchappweb.repositories.MediaListsRepository;
 import com.rewatchappweb.repositories.MediaRepository;
-import com.rewatchappweb.repositories.UserRepository;
 import com.rewatchappweb.utils.MediaAPI;
 
+@Transactional
 @Service
 public class MediaService {
-
-	@Autowired
-	private UserRepository userRepo;
 	
 	@Autowired
 	private MediaRepository mediaRepo;
@@ -25,37 +26,6 @@ public class MediaService {
 	@Autowired
 	private MediaAPIService mediaApiService;
 	
-	//Tomo una media, usuario y lista para agregar la pelicula en la lista correspondiente del usuario.
-	public void addToList(String userId, String mediaId, String listName) {
-		
-		User u = new User();
-		try {
-			Optional<User> us = userRepo.findById(userId);
-			if(us.isPresent()) {
-				u = us.get();
-			}else {
-				System.out.println("No se encontró el usuario");
-			}
-		
-		Media m = findMedia(mediaId);
-//		System.out.println("Media en addToList = " + m.toString());
-		switch(listName) {
-		case "favoritesList":	u.getFavoritesList().add(m.getId());
-								break;
-								
-		case "waitingList":		u.getWaitingList().add(m.getId());
-								break;
-								
-		case "alreadySeenList":	u.getAlreadySeenList().add(m.getId());
-								break;		
-		}
-		userRepo.save(u);
-		
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
 	
 	//Busca en la base de datos y si no se encuentra, se busca a traves de la api de imdb
 	public Media findMedia(String id) {
@@ -93,35 +63,55 @@ public class MediaService {
 	}
 	
 	//Actualización de listas para mostrar en Home, Peliculas y Series:
+	//Falta una solución para evitar el exceso de peticiones, hallar una manera de guardar las listas
 	@Autowired
 	private MediaAPI mediaApi;
 	
+	@Autowired
+	private MediaListsRepository mediaListsRepo;
+	
 	public MediaLists updateMediaLists() {
 		ArrayList<String> comingSoonMovies = new ArrayList<String>();
-		ArrayList<String> comingSoonSeries = new ArrayList<String>();
+//		ArrayList<String> comingSoonSeries = new ArrayList<String>();
 		ArrayList<String> popularMovies = new ArrayList<String>();
-		ArrayList<String> popularSeries = new ArrayList<String>();
+//		ArrayList<String> popularSeries = new ArrayList<String>();
 		ArrayList<String> bestMovies = new ArrayList<String>();
-		ArrayList<String> bestSeries = new ArrayList<String>();
+//		ArrayList<String> bestSeries = new ArrayList<String>();
 		
+		//Quiero que la aplicacion pueda actualizar las listas cada 7 días:---------------------
+		
+		MediaLists mediaLists = mediaListsRepo.getById(1);
 		try {
-			comingSoonMovies = mediaApi.selectedAPIList("comingSoonMovies");
-			comingSoonSeries = mediaApi.selectedAPIList("comingSoonTV");
-			popularMovies = mediaApi.selectedAPIList("popularMovies");
-			popularSeries = mediaApi.selectedAPIList("popularTV");
-			bestMovies = mediaApi.selectedAPIList("topRatedMovies");
-			bestSeries = mediaApi.selectedAPIList("topRatedTV");
+			Period sinceLastRefresh = Period.between(mediaLists.getLastRefreshDate(), LocalDate.now());
+			if(sinceLastRefresh.getDays() >= 7) {
+				comingSoonMovies = mediaApi.selectedAPIList("comingSoonMovies");
+//				comingSoonSeries = mediaApi.selectedAPIList("comingSoonTV");
+				popularMovies = mediaApi.selectedAPIList("popularMovies");
+//				popularSeries = mediaApi.selectedAPIList("popularTV");
+				bestMovies = mediaApi.selectedAPIList("topRatedMovies");
+//				bestSeries = mediaApi.selectedAPIList("topRatedTV");
+			}else {
+				comingSoonMovies = mediaLists.getComingSoonMovies();
+//				comingSoonSeries = mediaLists.getComingSoonSeries();
+				popularMovies = mediaLists.getPopularMovies();
+//				popularSeries = mediaLists.getPopularSeries();
+				bestMovies = mediaLists.getBestMovies();
+//				bestSeries = mediaLists.getBestSeries();
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		MediaLists mediaLists = new MediaLists();
 		
 		mediaLists.setComingSoonMovies(comingSoonMovies);
-		mediaLists.setComingSoonSeries(comingSoonSeries);
+//		mediaLists.setComingSoonSeries(comingSoonSeries);
 		mediaLists.setPopularMovies(popularMovies);
-		mediaLists.setPopularSeries(popularSeries);
+//		mediaLists.setPopularSeries(popularSeries);
 		mediaLists.setBestMovies(bestMovies);
-		mediaLists.setBestSeries(bestSeries);
+//		mediaLists.setBestSeries(bestSeries);
+		
+		mediaListsRepo.save(mediaLists);
+		
+		cleanUselessMedia();
 		
 		return(mediaLists);
 	}
@@ -153,7 +143,23 @@ public class MediaService {
 		return mediaArray;
 	}
 	
-	
+	public void cleanUselessMedia() {
+		List<String> idsNullMedia = mediaRepo.getIdsOfNullTitlesFromMedia();
+		MediaLists mLists = mediaListsRepo.getById(1);
+		
+		mLists.getBestMovies().removeAll(idsNullMedia);
+		mLists.getBestSeries().removeAll(idsNullMedia);
+		mLists.getPopularMovies().removeAll(idsNullMedia);
+		mLists.getPopularSeries().removeAll(idsNullMedia);
+		mLists.getComingSoonMovies().removeAll(idsNullMedia);
+		mLists.getComingSoonSeries().removeAll(idsNullMedia);
+		
+		mediaListsRepo.save(mLists);
+		
+		mediaRepo.deleteNullTitlesFromMedia();
+		
+		System.out.println("Deleted... maybe");
+	}
 	
 	
 	

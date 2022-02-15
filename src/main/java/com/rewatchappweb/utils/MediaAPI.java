@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class MediaAPI {
 
 	// Clave de cuenta de imdb:
-	final String myKey = "";
+	final String myKey = "k_a0jbzhwo";
 	
 	//Listas que devuelven los ID de la media:
 	public ArrayList<String> selectedAPIList(String listName) {
@@ -53,7 +53,8 @@ public class MediaAPI {
 		try {
 
 			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(listUrl))
-					//this space is where API keys are, they are private, sorry :)
+					.header("x-rapidapi-host", "imdb8.p.rapidapi.com")
+					.header("x-rapidapi-key", "823817262dmshcd51f1879ec116cp1f1d41jsnf62a4290b4c4")
 					.method("GET", HttpRequest.BodyPublishers.noBody()).build();
 			HttpResponse<String> response = HttpClient.newHttpClient().send(request,
 					HttpResponse.BodyHandlers.ofString());

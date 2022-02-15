@@ -1,0 +1,136 @@
+body{
+    background-image: url("../img/fondo.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    color: white;
+}
+body:before{
+	content:'';
+	position: fixed;
+	background-color: rgba(0,0,0, 0.65);
+	background-size: cover;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+/* Main grid container ----------------------------*/
+
+.user-details{
+	
+	grid-area: "user-details";
+}
+
+.profile-container{
+	/*background-color: #C0C0C0;
+	border-radius: 4px;*/
+}
+
+.lists-container{
+	background-color: #C0C0C0;
+	border-radius: 4px;
+	
+	
+	grid-area: "lists"
+}
+
+.container{
+	margin-top: 20px;
+	margin-left: 10%;
+	position: absolute;
+	
+	grid-column-gap: 20px;
+	display: grid;
+	grid-template-columns: 30% 87%;
+	grid-template-areas:
+	"user-details lists"
+}
+
+/* Profile details & picture ----------------------------*/
+
+.profile{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	background-color: grey;
+	color: white;
+	border-radius: 5px;
+	border: 2px solid black;
+}
+
+.profile img{
+	margin-top: 10px;
+	width: 250px;
+	height: 250px;
+}
+
+/* Media lists --------------------------------------------*/
+
+.user-list{
+	display:flex;
+	flex-wrap: wrap;
+  	justify-content: flex-left;
+	margin-left: 20px;
+}
+
+h2{
+	text-align: left;
+}
+
+.media-item{
+	color: white;
+	height: 200px;
+	width: 150px;
+	display: inline-block;
+}
+
+.miniatura{
+	height: 200px;
+	width: 140px;
+	grid-area: "miniatura";
+}
+
+.miniatura div{
+	background-size: cover;
+  	height: 200px;
+  	width: 140px;
+  	border-radius: 10%;  	
+}
+
+.titulo{
+	width: 150px;
+	justify-content: center;
+	text-align: center;
+}
+
+.info{
+	position: relative;
+	overflow: hidden;
+	width: 140px;
+	height: 200px;
+	background-color: rgba(31,31,31,0.7);
+	-webkit-transition: opacity 0.5s;
+	moz-transition: opacity 0.5s;
+	opacity: 0;
+}
+.info div{
+	display: flex;
+  	flex-wrap: wrap;
+  	align-content:center;
+  	justify-content: center;
+	margin-left: -70px;
+	-webkit-transition: margin 0.5s;
+	moz-transition: margin 0.5s;
+}
+
+.miniatura:hover .info{
+	opacity: 1;
+	margin-left: 0px;
+}
+.miniatura:hover .info div{
+	margin-left: 0px;
+}
+

@@ -1,27 +1,33 @@
 package com.rewatchappweb.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="mediaLists")
 public class MediaLists {
 
+	@Id
 	private Integer id;
+	@Column
 	private ArrayList<String> comingSoonMovies;
+	@Column
 	private ArrayList<String> comingSoonSeries;
+	@Column
 	private ArrayList<String> popularMovies;
+	@Column
 	private ArrayList<String> popularSeries;
+	@Column
 	private ArrayList<String> bestMovies;
+	@Column
 	private ArrayList<String> bestSeries;
-	
-	public MediaLists(ArrayList<String> comingSoonMovies, ArrayList<String> comingSoonSeries, ArrayList<String> popularMovies,
-			ArrayList<String> popularSeries, ArrayList<String> bestMovies, ArrayList<String> bestSeries) {
-		this.comingSoonMovies = comingSoonMovies;
-		this.comingSoonSeries = comingSoonSeries;
-		this.popularMovies = popularMovies;
-		this.popularSeries = popularSeries;
-		this.bestMovies = bestMovies;
-		this.bestSeries = bestSeries;
-	}
+	@Column
+	private LocalDate lastRefreshDate;
 
 	public MediaLists() {
 		
@@ -81,6 +87,14 @@ public class MediaLists {
 
 	public void setBestSeries(ArrayList<String> bestSeries) {
 		this.bestSeries = bestSeries;
+	}
+
+	public LocalDate getLastRefreshDate() {
+		return lastRefreshDate;
+	}
+
+	public void setLastRefreshDate(LocalDate lastRefreshDate) {
+		this.lastRefreshDate = lastRefreshDate;
 	}
 	
 	

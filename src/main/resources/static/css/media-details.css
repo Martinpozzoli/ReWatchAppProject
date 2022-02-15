@@ -1,0 +1,95 @@
+body{
+    background-image: url("../img/fondo.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    color: white;
+}
+body:before{
+	content:'';
+	position: fixed;
+	background-color: rgba(0,0,0, 0.65);
+	background-size: cover;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+
+.texto{
+	text-align: justify;
+	width: 350px;
+	margin-left: 30px;
+	grid-area: "texto";
+	color: white;
+}
+
+.portada{
+	grid-area: "portada";
+	width: 300px;
+	height: 500px;
+}
+
+.portada img{
+	width: 100%;
+	height: 100%;
+	border-radius: 10%;
+}
+
+.sinopsis{
+	text-align: justify;
+	width: 420px;
+	margin-left: 100px;
+	grid-area: "sinopsis";
+	color: white;
+}
+
+.botones{
+	position: relative;
+	margin-top: 15px;
+	display: inline-block;
+	height: 200px;
+}
+
+.btn-agregar{
+	margin-left: 20px;
+}
+
+.sub-botones{
+	display: none;
+	margin-left: 400px;
+	margin-top: -100px;
+}
+
+.btn-espera{
+	white-space: nowrap;
+}
+.btn-vista{
+	margin-top: 7px;
+	white-space: nowrap;
+}
+.btn-favoritos{
+	margin-top: 7px;
+	white-space: nowrap;
+}
+.details-container{
+	margin-top: 7%;
+	margin-left: 10%;
+	position: relative;
+	display: grid;
+	grid-template-columns: 30% 30% auto;
+	grid-template-areas:
+	"portada texto sinopsis"
+}
+
+
+
+
+
+
+
+
+
+
+

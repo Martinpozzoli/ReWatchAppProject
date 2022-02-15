@@ -27,21 +27,25 @@ public class HomeController {
 			MediaLists mediaLists = mediaService.updateMediaLists();
 			
 			List<Media> comingSoonMovies = mediaService.listForController("comingSoonMovies", mediaLists);
-			List<Media> comingSoonSeries = mediaService.listForController("comingSoonSeries", mediaLists);
+//			List<Media> comingSoonSeries = mediaService.listForController("comingSoonSeries", mediaLists);
 			List<Media> popularMovies = mediaService.listForController("popularMovies", mediaLists);
-			List<Media> popularSeries = mediaService.listForController("popularSeries", mediaLists);
+//			List<Media> popularSeries = mediaService.listForController("popularSeries", mediaLists);
 			List<Media> bestMovies = mediaService.listForController("bestMovies", mediaLists);
-			List<Media> bestSeries = mediaService.listForController("bestSeries", mediaLists);
+//			List<Media> bestSeries = mediaService.listForController("bestSeries", mediaLists);
 			
 			List<Media> moviesForCarousel = popularMovies.subList(0, 4);
 			model.addAttribute("moviesForCarousel", moviesForCarousel);
 		
-			model.addAttribute("comingSoonMovies", comingSoonMovies);
-			model.addAttribute("comingSoonSeries", comingSoonSeries);
-			model.addAttribute("popularMovies", popularMovies);
-			model.addAttribute("popularSeries", popularSeries);
-			model.addAttribute("bestMovies", bestMovies);
-			model.addAttribute("bestSeries", bestSeries);
+			List<Media> comingSoonMoviesSub = comingSoonMovies.subList(0, 10);
+			List<Media> popularMoviesSub = popularMovies.subList(0, 10);
+			List<Media> bestMoviesSub = bestMovies.subList(0, 10);
+			
+			model.addAttribute("comingSoonMovies", comingSoonMoviesSub);
+//			model.addAttribute("comingSoonSeries", comingSoonSeries);
+			model.addAttribute("popularMovies", popularMoviesSub);
+//			model.addAttribute("popularSeries", popularSeries);
+			model.addAttribute("bestMovies", bestMoviesSub);
+//			model.addAttribute("bestSeries", bestSeries);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

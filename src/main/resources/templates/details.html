@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+
+<!-- CSS only -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/media-details.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+</head>
+<body class="text-center">
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/home"><strong>ReWatchApp</strong></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/home">Inicio</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/logout">Cerrar Sesión</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/peliculas">Peliculas</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/series">Series</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							href="/animes">Animes</a></li>
+						<li class="nav-item"><a class="nav-link active" href="#">Lista
+								de Espera</a></li>
+						<li class="nav-item"><a class="nav-link active" href="#">Favoritos</a>
+						</li>
+						<li class="nav-item"><a class="nav-link active" href="#">Recomendaciones</a>
+						</li>
+						<li class="nav-item"><a class="nav-link active" th:href="@{/user/__${session.usersession.id}__}">Mi perfil</a>
+						</li>
+					</ul>
+					<form class="d-flex">
+						<input class="form-control me-2" type="search"
+							placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<div class="details-container">
+			<div class="portada">
+				<img th:src="${media.image}" class="d-inlineblock">
+			</div>
+			<div class="texto">
+				<h1 th:text="${media.title}"></h1>
+				<h3 th:text="${media.year}"></h3>
+				<h6 th:text="${'Estreno: ' + media.releaseDate}"></h6>
+				<h6 th:text="${'Genero: ' + media.genres}"></h6>
+				<p th:text="${media.countries}"></p>
+				<p th:text="${'Cast: ' + media.stars}"></p>
+				<p th:text="${'Director/a: ' + media.directors}"></p>
+				<p th:text="${'Rating IMDB: ' + media.imDbRating}"></p>
+				<p th:text="${'Clasificación: ' + media.contentRating}"></p>
+			</div>
+			<div class="sinopsis">
+				<h3>Sinopsis</h3>
+				<h6 th:text="${media.plot}"></h6>
+			</div>
+		</div>
+		<div class="botones">
+			<div class="btn-agregar">
+  				<button type="button" class="btn btn-lg btn-primary" onclick="mostrar()">Agregar a...</button>
+			</div>
+			<div class="sub-botones" id="sub-botones">
+  				<div class="btn-espera">
+    				<a class="btn btn-lg btn-warning" th:href="@{/media/add/__${media.id}__/__${session.usersession.id}__/{listName}(listName='waitingList')}">Lista de Espera</a>
+  				</div>
+  				<div class="btn-vista">
+    				<a class="btn btn-lg btn-success" th:href="@{/media/add/__${media.id}__/__${session.usersession.id}__/{listName}(listName='alreadySeenList')}">Ya la vi</a>
+  				</div>
+  				<div class="btn-favoritos">
+    				<a class="btn btn-lg btn-danger" th:href="@{/media/add/__${media.id}__/__${session.usersession.id}__/{listName}(listName='favoritesList')}">Favoritos</a>
+  				</div>
+  			</div>
+  		</div>
+ 	
+	</main>
+
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/details.js"></script>
+</body>
+</html>

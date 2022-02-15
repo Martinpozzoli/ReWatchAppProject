@@ -17,9 +17,19 @@ body {
   
   .texto{
   	margin-left: 20%;
-  	margin-top: 20%;
+  	margin-top: 10%;
   	color: white;
   	grid-area: "texto";
+  }
+  
+  .plot{
+  	max-height: 155px;
+  	/*word-break: break-all;*/
+  	display: -webkit-box;
+  	-webkit-line-clamp: 5;
+  	-webkit-box-orient: vertical;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
   }
   
   .portada{

@@ -2,12 +2,14 @@ package com.rewatchappweb.services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rewatchappweb.entities.Media;
+import com.rewatchappweb.errors.ErrorServicio;
 import com.rewatchappweb.utils.MediaAPI;
 
 @Service
@@ -19,13 +21,25 @@ public class MediaAPIService {
 	@Autowired
 	private MediaService mediaService;
 
-	//Este método se encarga de pedir un listado de IDs a selectedAPIList segun lo indique el usuario,
+	//Estos método se encarga de pedir un listado de IDs a selectedAPIList segun lo indique el usuario,
 	//pasa los datos uno por uno a generateMedia para armar un array de media con los datos requeridos
-	public ArrayList<Media> generateMediaByList(ArrayList<String> mediaIDs) {
+	public ArrayList<Media> generateUserMediaByList(List<String> mediaIDs) {
 		
 		ArrayList<Media> mediaList = new ArrayList<Media>();
 		Media m = new Media();
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < mediaIDs.size(); i++) {
+			m = mediaService.findMedia(mediaIDs.get(i));
+			System.out.println(m.toString());
+			mediaList.add(m);
+		}
+		return mediaList;
+	}
+	
+	public ArrayList<Media> generateMediaByList(List<String> mediaIDs) {
+		
+		ArrayList<Media> mediaList = new ArrayList<Media>();
+		Media m = new Media();
+		for (int i = 0; i < 50; i++) {
 			m = mediaService.findMedia(mediaIDs.get(i));
 			System.out.println(m.toString());
 			mediaList.add(m);
@@ -34,7 +48,7 @@ public class MediaAPIService {
 	}
 	
 	//Recibe el ID de la pelicula o serie (Ej: "tt0411008") y genera el objeto Media ---------------------------------------------
-	public Media generateMedia(String id) {
+	public Media generateMedia(String id) throws ErrorServicio{
 
 		JSONObject object = mediaAPI.findByID(id);
 
@@ -52,6 +66,7 @@ public class MediaAPIService {
 		String contentRating = object.optString("contentRating");
 
 		Media m = new Media();
+		
 
 		m.setId(id);
 		m.setTitle(title);
@@ -93,18 +108,19 @@ public class MediaAPIService {
 //		}
 //	}
 
-	//Genera el arreglo para guardarlo como atributo en Media
+	//Genera el arreglo para guardarlo como atributo en Media (Revisar error al traer la primer letra, probar con la api)
+	//Creo que ya lo corregí, falta actualizar todo y ver que pasa.(borrar todas las medias anteriores cuando se reseteen las peticiones)
 	public ArrayList<String> validarArray(String str) {
 		ArrayList<String> arr = new ArrayList<String>();
 		String cont = "";
 		str = str + "!";
 		boolean flag = false;
-		for (int i = 0; i < str.length(); i++) {
+		int i = 0;
+		while (i < str.length()) {
 			if (str.charAt(i) != ',' && str.charAt(i) != '!') {
 				flag = true;
 			}
 			while (flag == true) {
-				i++;
 				if (str.charAt(i) != ',' && str.charAt(i) != '!') {
 					cont = cont + str.charAt(i);
 				}
@@ -113,6 +129,7 @@ public class MediaAPIService {
 					cont = "";
 					flag = false;
 				}
+				i++;
 			}
 		}
 		return arr;

@@ -13,43 +13,82 @@ main{
 
 .scrollable{
 	width: 100%;
-  	max-width: 1380px;
+  	max-width: 1370px;
 	background-color: rgba(6, 6, 191, 0.432);
     border: 5px solid rgba(8, 8, 123, 0.83);
+    overflow-y: hidden;
 	overflow-x: auto;
+	white-space: nowrap;
 	display: grid;
-	grid-template-columns: repeat(20,300px);
+	grid-template-columns: repeat(15,170px);
+	/*Para firefox e IE*/
+	scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+    scrollbar-width: thin;
+}
+
+/*Para el resto de los exploradores*/
+.scrollable::-webkit-scrollbar {
+    height: 10px;
+    background-color: #F5F5F5;
+}
+.scrollable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.9);
+    border-radius: 10px;
+    background-color: #CCCCCC;
+}
+.scrollable::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #D62929;
+    background-image: -webkit-linear-gradient(90deg,transparent,rgba(0, 0, 0, 0.4) 50%,transparent,transparent)
 }
 
 .media-item{
 	height: 200px;
-	width: 400px;
-	
+	width: 150px;
+	/*border: solid black 2px;*/
 }
 
 .miniatura{
 	height: 200px;
-	width: 100px;
+	width: 140px;
 	grid-area: "miniatura";
 }
 
-.miniatura img{
-  	height: 100%;
-  	width: 100%;
+.miniatura div{
+	background-size: cover;
+  	height: 200px;
+  	width: 140px;
   	border-radius: 10%;  	
 }
 
 .titulo{
+	width: 150px;
 	justify-content: center;
 	text-align: center;
-	grid-area: "titulo";
 }
 
-.media-item{
-	display: grid;
-	grid-template-columns: 50% auto;
-	grid-template-areas:
-		"titulo miniatura"
+.info{
+	position: relative;
+	overflow: hidden;
+	width: 140px;
+	height: 200px;
+	background-color: rgba(31,31,31,0.7);
+	-webkit-transition: opacity 0.5s;
+	moz-transition: opacity 0.5s;
+	opacity: 0;
+}
+.info div{
+	margin-left: -70px;
+	-webkit-transition: margin 0.5s;
+	moz-transition: margin 0.5s;
+}
+
+.miniatura:hover .info{
+	opacity: 1;
+	margin-left: 0px;
+}
+.miniatura:hover .info div{
+	margin-left: 0px;
 }
 
 footer{

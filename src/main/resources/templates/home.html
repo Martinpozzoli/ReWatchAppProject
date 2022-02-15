@@ -65,6 +65,8 @@
 						</li>
 						<li class="nav-item"><a class="nav-link active" href="#">Recomendaciones</a>
 						</li>
+						<li class="nav-item"><a class="nav-link active" th:href="@{/user/__${session.usersession.id}__}">Mi perfil</a>
+						</li>
 					</ul>
 					<form class="d-flex">
 						<input class="form-control me-2" type="search"
@@ -75,7 +77,7 @@
 			</div>
 		</nav>
 	</header>
-
+  
 	<main>
 
 		<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -85,9 +87,12 @@
 						<div class="texto">
 							<h1 th:text="${popularMovies[5].title}"></h1>
 							<p th:text="${popularMovies[5].year}"></p>
-							<p th:text="${popularMovies[5].plot}"></p>
+							<div class="plot">
+								<p th:text="${popularMovies[5].plot}"></p>
+							</div>
+							<br>
 							<p>
-								<a class="btn btn-lg btn-primary" href="#">Más información</a>
+								<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${popularMovies[5].id}__}">Más información</a>
 							</p>
 						</div>
 						<div class="portada">
@@ -100,9 +105,12 @@
 						<div class="texto">
 							<h1 th:text="${movie.title}"></h1>
 							<p th:text="${movie.year}"></p>
-							<p th:text="${movie.plot}"></p>
+							<div class="plot">
+								<p th:text="${movie.plot}"></p>
+							</div>
+							<br>
 							<p>
-								<a class="btn btn-lg btn-primary" href="#">Más información</a>
+								<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${movie.id}__}">Más información</a>
 							</p>
 						</div>
 						<div class="portada">
@@ -131,49 +139,61 @@
 				<h2>Populares</h2>
 				<div class="popular-movies scrollable">
 					<div class="media-item" th:each="movie : ${popularMovies}">
-						<div class="titulo">
-							<h5 th:text="${movie.title}"></h5>
-						</div>
 						<div class="miniatura">
-							<img th:src="${movie.image}" class="d-inlineblock">
+							<div th:style="'background-image: url(' + ${movie.image} + ');'">
+								<div class="info">
+									<div>
+										<h5 class="titulo" th:text="${movie.title}"></h5>
+										<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${movie.id}__}">Más info...</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<!-- <h2>Próximas</h2>
-				<div class="next-movies">
+				<h2>Próximas</h2>
+				<div class="next-movies scrollable">
 					<div class="media-item" th:each="movie : ${comingSoonMovies}">
-						<div class="titulo">
-							<h3 th:text="${movie.title}"></h3>
-						</div>
 						<div class="miniatura">
-							<img th:src="${movie.image}" class="d-inlineblock">
+							<div th:style="'background-image: url(' + ${movie.image} + ');'">
+								<div class="info">
+									<div>
+										<h5 class="titulo" th:text="${movie.title}"></h5>
+										<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${movie.id}__}">Más info...</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<h2>Mejores</h2>
-				<div class="best-movies">
+				<div class="best-movies scrollable">
 					<div class="media-item" th:each="movie : ${bestMovies}">
-						<div class="titulo">
-							<h3 th:text="${movie.title}"></h3>
-						</div>
 						<div class="miniatura">
-							<img th:src="${movie.image}" class="d-inlineblock">
+							<div th:style="'background-image: url(' + ${movie.image} + ');'">
+								<div class="info">
+									<div>
+										<h5 class="titulo" th:text="${movie.title}"></h5>
+										<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${movie.id}__}">Más info...</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div> -->
+				</div> 
 			</div>
 		</div>
 
 
 		<!-- FOOTER -->
-		<footer>
-      		<p class="float-end"><a href="#">Back to top</a></p>
-      		<p>Contacto:</p>
+<!--		<footer>
+      		<!-- <p class="float-end"><a href="#">Back to top</a></p>-->
+    <!--  		<p>Contacto:</p>
       		<p>Correo: <a href="mailto:pozzolidev@gmail.com">pozzolidev@gmail.com</a></p>
       		<p>LinkedIn: <a href="https://www.linkedin.com/in/martinpozzoli/">Martin Pozzoli</a></p>
     	</footer>
 	</main>
-
+-->
 	<!-- JavaScript Bundle with Popper -->
 	<script src="js/bootstrap.bundle.min.js"></script>
 

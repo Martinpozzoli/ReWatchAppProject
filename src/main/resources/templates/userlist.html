@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series</title>
+    <title>Lista</title>
 
     <!-- CSS only -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/user-list.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap-responsive.css">
  
         <style>
           .bd-placeholder-img {
@@ -46,10 +49,10 @@
             <a class="nav-link active" href="/logout">Cerrar Sesión</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/peliculas">Peliculas</a>
+            <a class="nav-link active" href="/#">Peliculas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Series</a>
+            <a class="nav-link active" href="/series">Series</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/animes">Animes</a>
@@ -63,15 +66,47 @@
           <li class="nav-item">
             <a class="nav-link active" href="#">Recomendaciones</a>
           </li>
+          <li class="nav-item"><a class="nav-link active" th:href="@{/user/__${session.usersession.id}__}">Mi perfil</a>
+						</li>
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </div>
   </nav>
 </header>
+<main>
+	<div class="list-container">
+		<div class="user-list">
+			<div class="media-item" th:each="movie : ${mediaList}">
+				<div class="miniatura">
+					<div th:style="'background-image: url(' + ${movie.image} + ');'">
+						<div class="info">
+							<div>
+								<h5 class="titulo" th:text="${movie.title}"></h5>
+								<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${movie.id}__}">Más info...</a>
+								<a class="btn btn-lg btn-danger" th:href="@{/media/remove/__${movie.id}__/__${session.usersession.id}__/__${listName}__}">Quitar</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="navigator">
+		<a class="arrow left-arrow" th:if="${numPage != 1}" th:href="@{/user/__${session.usersession.id}__/__${listName}__/__${numPage - 1}__}">
+			<div></div>
+		</a>
+		<div class="page-number">
+			<a th:text="${numPage}" th:href="@{/user/__${session.usersession.id}__/__${listName}__/__${numPage}__}"></a>
+		</div>
+		<a class="arrow right-arrow" th:if="${lastPage == false}" th:href="@{/user/__${session.usersession.id}__/__${listName}__/__${numPage + 1}__}">
+			<div></div>
+		</a>
+	</div>
+</main>	
 
       <!-- JavaScript Bundle with Popper -->
       <script src="js/bootstrap.bundle.min.js"></script>
