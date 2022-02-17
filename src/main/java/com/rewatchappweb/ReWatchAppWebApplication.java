@@ -56,6 +56,7 @@ public class ReWatchAppWebApplication implements CommandLineRunner{
 		
 
 //		MediaLists mLists = mediaListsRepo.getById(1);
+//		System.out.println(mLists.getBestMovies().toString());
 //		System.out.println(LocalDate.now().toString());
 //		mLists.setLastRefreshDate(LocalDate.now());
 //		mediaListsRepo.save(mLists);

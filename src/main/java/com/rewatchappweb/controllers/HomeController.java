@@ -36,9 +36,9 @@ public class HomeController {
 			List<Media> moviesForCarousel = popularMovies.subList(0, 4);
 			model.addAttribute("moviesForCarousel", moviesForCarousel);
 		
-			List<Media> comingSoonMoviesSub = comingSoonMovies.subList(0, 10);
-			List<Media> popularMoviesSub = popularMovies.subList(0, 10);
-			List<Media> bestMoviesSub = bestMovies.subList(0, 10);
+			List<Media> comingSoonMoviesSub = comingSoonMovies.subList(0, 15);
+			List<Media> popularMoviesSub = popularMovies.subList(0, 15);
+			List<Media> bestMoviesSub = bestMovies.subList(0, 15);
 			
 			model.addAttribute("comingSoonMovies", comingSoonMoviesSub);
 //			model.addAttribute("comingSoonSeries", comingSoonSeries);
