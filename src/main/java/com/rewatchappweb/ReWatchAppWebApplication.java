@@ -60,7 +60,7 @@ public class ReWatchAppWebApplication implements CommandLineRunner{
 //		System.out.println(LocalDate.now().toString());
 //		mLists.setLastRefreshDate(LocalDate.now());
 //		mediaListsRepo.save(mLists);
-		mediaService.updateMediaLists();
+//		mediaService.updateMediaLists();
 		
 		
 		

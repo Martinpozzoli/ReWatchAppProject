@@ -68,9 +68,9 @@
 						<li class="nav-item"><a class="nav-link active" th:href="@{/user/__${session.usersession.id}__}">Mi perfil</a>
 						</li>
 					</ul>
-					<form class="d-flex">
+					<form class="d-flex" action="/media/browse" method="POST">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+							placeholder="Search" aria-label="Search" name="p">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
@@ -192,8 +192,9 @@
       		<p>Correo: <a href="mailto:pozzolidev@gmail.com">pozzolidev@gmail.com</a></p>
       		<p>LinkedIn: <a href="https://www.linkedin.com/in/martinpozzoli/">Martin Pozzoli</a></p>
     	</footer>
+    -->
 	</main>
--->
+
 	<!-- JavaScript Bundle with Popper -->
 	<script src="js/bootstrap.bundle.min.js"></script>
 

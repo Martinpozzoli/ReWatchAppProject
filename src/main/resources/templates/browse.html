@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse</title>
+
+    <!-- CSS only -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/user-list.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+ 
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+    
+        
+        <!-- Custom styles for this template -->
+        <link href="css/signin.css" rel="stylesheet">
+      </head>
+      <body class="text-center">
+      <header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><strong>ReWatchApp</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/logout">Cerrar Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/#">Peliculas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/series">Series</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/animes">Animes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Lista de Espera</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Favoritos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Recomendaciones</a>
+          </li>
+          <li class="nav-item"><a class="nav-link active" th:href="@{/user/__${session.usersession.id}__}">Mi perfil</a>
+						</li>
+        </ul>
+        <form class="d-flex" action="/media/browse" method="POST">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="p">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+	<div class="list-container">
+		<div class="user-list">
+			<div class="media-item" th:each="movie : ${mediaList}">
+				<div class="miniatura">
+					<div th:style="'background-image: url(' + ${movie.image} + ');'">
+						<div class="info">
+							<div>
+								<h5 class="titulo" th:text="${movie.title}"></h5>
+								<a class="btn btn-lg btn-primary" th:href="@{/media/details/__${movie.id}__}">Más info...</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  
+	<div class="navigator">
+		<a class="arrow left-arrow" th:if="${numPage != 1}" th:href="@{/user/__${session.usersession.id}__/__${listName}__/__${numPage - 1}__}">
+			<div></div>
+		</a>
+		<div class="page-number">
+			<a th:text="${numPage}" th:href="@{/user/__${session.usersession.id}__/__${listName}__/__${numPage}__}"></a>
+		</div>
+		<a class="arrow right-arrow" th:if="${lastPage == false}" th:href="@{/user/__${session.usersession.id}__/__${listName}__/__${numPage + 1}__}">
+			<div></div>
+		</a>
+	</div>
+	-->
+</main>	
+
+      <!-- JavaScript Bundle with Popper -->
+      <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -27,7 +27,7 @@ public class MediaService {
 	private MediaAPIService mediaApiService;
 	
 	
-	//Busca en la base de datos y si no se encuentra, se busca a traves de la api de imdb
+	//Busca en la base de datos y si no se encuentra, se busca a traves de la api de imdb ------------------------------------------------------------
 	public Media findMedia(String id) {
 		
 		Media m = new Media();
@@ -48,7 +48,7 @@ public class MediaService {
 		}
 	}
 	
-	//Agregar media a la base de datos para evitar el exceso de consultas a las APIs que son limitadas:
+	//Agregar media a la base de datos para evitar el exceso de consultas a las APIs que son limitadas: --------------------------------------------------
 	public void addMediaToDB(Media m) {
 		try {
 		if(!mediaRepo.findById(m.getId()).isPresent()) {
@@ -63,7 +63,7 @@ public class MediaService {
 	}
 	
 	//Actualización de listas para mostrar en Home, Peliculas y Series:
-	//Falta una solución para evitar el exceso de peticiones, hallar una manera de guardar las listas
+	//Falta una solución para evitar el exceso de peticiones, hallar una manera de guardar las listas --------------------------------------------------
 	@Autowired
 	private MediaAPI mediaApi;
 	
@@ -78,7 +78,7 @@ public class MediaService {
 		ArrayList<String> bestMovies = new ArrayList<String>();
 //		ArrayList<String> bestSeries = new ArrayList<String>();
 		
-		//Quiero que la aplicacion pueda actualizar las listas cada 7 días:---------------------
+		//Quiero que la aplicacion pueda actualizar las listas cada 7 días:---------------
 		
 		MediaLists mediaLists = mediaListsRepo.getById(1);
 		try {
@@ -116,7 +116,7 @@ public class MediaService {
 		return(mediaLists);
 	}
 	
-	//Devolver las listas anteriores para el uso de los controladores:
+	//Devolver las listas anteriores para el uso de los controladores: ---------------------------------------------------------------------
 	public ArrayList<Media> listForController(String listName, MediaLists mediaLists){
 		ArrayList<Media> mediaArray = new ArrayList<Media>();
 		switch(listName) {
@@ -144,7 +144,7 @@ public class MediaService {
 	}
 	
 	//Obtiene los ids de medias que no tienen titulo y borra los 
-	//registros de la base de datos y de las listas que las contenian:
+	//registros de la base de datos y de las listas que las contenian: -------------------------------------------------------------
 	public void cleanUselessMedia() {
 		List<String> idsNullMedia = mediaRepo.getIdsOfNullTitlesFromMedia();
 		MediaLists mLists = mediaListsRepo.getById(1);
@@ -161,5 +161,26 @@ public class MediaService {
 		mediaRepo.deleteNullTitlesFromMedia();
 		
 	}
+	
+	//Busqueda de peliculas por titulo, cast y director--------------------------------------------------------------------------------
+	public List<Media> searchByComparison(String p){
+		List<Media> mediaList = new ArrayList<Media>();
+		
+		try {
+			mediaList.addAll(mediaRepo.getListByTitle(p));
+			
+//			mediaList.addAll(mediaRepo.getListByCast(p));
+//			mediaList.addAll(mediaRepo.getListByDirector(p));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(mediaRepo.getListByTitle(p).toString());
+		return mediaList;
+	}
+	
+	
+	
+	
+	
 	
 }
