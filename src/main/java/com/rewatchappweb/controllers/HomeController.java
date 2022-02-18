@@ -26,7 +26,7 @@ public class HomeController {
 		try {
 			MediaLists mediaLists = mediaService.updateMediaLists();
 			
-			List<Media> comingSoonMovies = mediaService.listForController("comingSoonMovies", mediaLists);
+			//List<Media> comingSoonMovies = mediaService.listForController("comingSoonMovies", mediaLists);
 //			List<Media> comingSoonSeries = mediaService.listForController("comingSoonSeries", mediaLists);
 			List<Media> popularMovies = mediaService.listForController("popularMovies", mediaLists);
 //			List<Media> popularSeries = mediaService.listForController("popularSeries", mediaLists);
@@ -36,11 +36,11 @@ public class HomeController {
 			List<Media> moviesForCarousel = popularMovies.subList(0, 4);
 			model.addAttribute("moviesForCarousel", moviesForCarousel);
 		
-			List<Media> comingSoonMoviesSub = comingSoonMovies.subList(0, 15);
+			//List<Media> comingSoonMoviesSub = comingSoonMovies.subList(0, 15);
 			List<Media> popularMoviesSub = popularMovies.subList(0, 15);
 			List<Media> bestMoviesSub = bestMovies.subList(0, 15);
 			
-			model.addAttribute("comingSoonMovies", comingSoonMoviesSub);
+			//model.addAttribute("comingSoonMovies", comingSoonMoviesSub);
 //			model.addAttribute("comingSoonSeries", comingSoonSeries);
 			model.addAttribute("popularMovies", popularMoviesSub);
 //			model.addAttribute("popularSeries", popularSeries);

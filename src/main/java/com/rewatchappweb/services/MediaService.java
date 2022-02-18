@@ -169,8 +169,8 @@ public class MediaService {
 		try {
 			mediaList.addAll(mediaRepo.getListByTitle(p));
 			
-//			mediaList.addAll(mediaRepo.getListByCast(p));
-//			mediaList.addAll(mediaRepo.getListByDirector(p));
+			mediaList.addAll(mediaRepo.getListByCast(p));
+			mediaList.addAll(mediaRepo.getListByDirector(p));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

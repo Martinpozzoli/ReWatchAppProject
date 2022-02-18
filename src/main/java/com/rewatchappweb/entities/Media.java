@@ -1,7 +1,6 @@
 package com.rewatchappweb.entities;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import javax.persistence.*;
 
@@ -16,10 +15,10 @@ public class Media {
 	private LocalDate releaseDate;
 	private String plot;
 	private int runtime;
-	private ArrayList<String> genres;
-	private ArrayList<String> countries;
-	private ArrayList<String> stars;
-	private ArrayList<String> directors;
+	private String genres;
+	private String countries;
+	private String stars;
+	private String directors;
 	private String imDbRating;
 	private String contentRating;
 	
@@ -28,8 +27,8 @@ public class Media {
 	}
 
 	public Media(String id, String title, int year, String image, LocalDate releaseDate, String plot,
-			int runtime, ArrayList<String> genres, ArrayList<String> countries, ArrayList<String> stars, 
-			ArrayList<String> directors, String imDbRating, String contentRating) {
+			int runtime, String genres, String countries, String stars, 
+			String directors, String imDbRating, String contentRating) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -100,35 +99,35 @@ public class Media {
 		this.plot = plot;
 	}
 
-	public ArrayList<String> getGenres() {
+	public String getGenres() {
 		return genres;
 	}
 
-	public void setGenres(ArrayList<String> genres) {
+	public void setGenres(String genres) {
 		this.genres = genres;
 	}
 
-	public ArrayList<String> getCountries() {
+	public String getCountries() {
 		return countries;
 	}
 
-	public void setCountries(ArrayList<String> countries) {
+	public void setCountries(String countries) {
 		this.countries = countries;
 	}
 
-	public ArrayList<String> getStars() {
+	public String getStars() {
 		return stars;
 	}
 
-	public void setStars(ArrayList<String> stars) {
+	public void setStars(String stars) {
 		this.stars = stars;
 	}
 
-	public ArrayList<String> getDirectors() {
+	public String getDirectors() {
 		return directors;
 	}
 
-	public void setDirectors(ArrayList<String> directors) {
+	public void setDirectors(String directors) {
 		this.directors = directors;
 	}
 

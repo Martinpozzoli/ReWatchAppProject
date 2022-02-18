@@ -16,11 +16,6 @@ public interface MediaRepository extends JpaRepository<Media,String>{
 	@Query("SELECT m FROM Media m WHERE m.title =:title")
 	public Media findByTitle(@Param("title")String title);
 	
-	/*
-	 @Query("SELECT u.username FROM User u WHERE u.username LIKE CONCAT('%',:username,'%')")
-	 List<String> findUsersWithPartOfName(@Param("username") String username);
-	 */
-	
 	@Query("SELECT m FROM Media m WHERE m.title LIKE CONCAT('%',:title,'%')")
 	public List<Media> getListByTitle(@Param("title")String title);
 	
