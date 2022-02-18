@@ -89,10 +89,10 @@ public class MediaAPIService {
 		}
 		//------------------------------------------------------
 		m.setPlot(plot);
-		m.setGenres(validarArray(genres));
-		m.setCountries(validarArray(countries));
-		m.setStars(validarArray(stars));
-		m.setDirectors(validarArray(directors));
+		m.setGenres(validateArray(genres));
+		m.setCountries(validateArray(countries));
+		m.setStars(validateArray(stars));
+		m.setDirectors(validateArray(directors));
 		m.setImDbRating(imDbRating);
 		m.setContentRating(contentRating);
 
@@ -111,7 +111,7 @@ public class MediaAPIService {
 	//Genera el arreglo para guardarlo como atributo en Media (Revisar error al traer la primer letra, probar con la api)
 	//Creo que ya lo corregí, falta actualizar todo y ver que pasa.(borrar todas las medias anteriores cuando se reseteen las peticiones)
 	
-	public String validarArray(String str) {
+	public String validateArray(String str) {
 		String finalString = "";
 		String cont = "";
 		str = str + "!";
@@ -127,7 +127,7 @@ public class MediaAPIService {
 				}
 				if (str.charAt(i) == ',' || str.charAt(i) == '!') {
 					finalString = finalString + cont;
-					cont = " ";
+					cont = ", ";
 					flag = false;
 				}
 				i++;
